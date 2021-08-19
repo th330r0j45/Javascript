@@ -107,3 +107,26 @@ body {
 .btn-start:active {
     transform: scale(.95);
 }
+
+.celeste,
+.violeta,
+.naranja,
+.verde {
+    transition: .2s ease-out;
+}
+
+.celeste.light,
+.violeta.light,
+.naranja.light,
+.verde.light {
+    animation: aumentar .3s ease-out;
+}
+
+@keyframes aumentar {
+    0% {
+        transform: scale(0.95)
+    }
+    100% {
+        transform: scale(1.03)
+    }
+}

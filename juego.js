@@ -14,7 +14,7 @@ class Juego {
     inicializar() {
         this.siguienteNivel = this.siguienteNivel.bind(this);
         this.elegirColor = this.elegirColor.bind(this);
-        this.toggleBtnEmpezar()
+        this.toggleBtnEmpezar();
         this.nivel = 1;
         this.colores = {
             celeste,
@@ -32,9 +32,7 @@ class Juego {
     }
 
     generarSecuencia() {
-        this.secuencia = new Array(ULTIMO_NIVEL)
-            .fill(0)
-            .map(n => Math.floor(Math.random() * 4));
+        this.secuencia = new Array(ULTIMO_NIVEL).fill(0).map(n => Math.floor(Math.random() * 4))
     }
     siguienteNivel() {
         this.subnivel = 0;
@@ -67,16 +65,16 @@ class Juego {
     }
     iluminarSecuencia() {
         for (let i = 0; i < this.nivel; i++) {
-            const color = this.transformarNumeroAColor(this.secuencia[i]);
-            setTimeout(() => this.iluminarColor(color), 1000 * i);
+            const color = this.transformarNumeroAColor(this.secuencia[i])
+            setTimeout(() => this.iluminarColor(color), 1000 * i)
         }
     }
     iluminarColor(color) {
-        this.colores[color].classList.add('light');
-        setTimeout(() => this.apagarColor(color), 350);
+        this.colores[color].classList.add('light')
+        setTimeout(() => this.apagarColor(color), 350)
     }
     apagarColor(color) {
-        this.colores[color].classList.remove('light');
+        this.colores[color].classList.remove('light')
     }
     agregarEventosClick() {
         this.colores.celeste.addEventListener('click', this.elegirColor)
@@ -98,7 +96,7 @@ class Juego {
 
         if (numeroColor === this.secuencia[this.subnivel]) {
             this.subnivel++;
-            if (this.subnivel === this.subnivel) {
+            if (this.subnivel === this.nivel) {
                 this.nivel++;
                 this.eliminarEventosClick();
                 if (this.nivel === ULTIMO_NIVEL + 1) {
@@ -114,13 +112,15 @@ class Juego {
     ganoElJuego() {
         Swal.fire("Ganaste", "=D", "success")
             .then(this.inicializar);
+        this.toggleBtnEmpezar()
+
     }
     perdioElJuego() {
         Swal.fire("Perdiste", "=(", "error")
             .then(() => {
-                this.eliminarEventosClick();
-                this.inicializar();
-            });
+                this.eliminarEventosClick()
+                this.inicializar()
+            })
     }
 }
 
